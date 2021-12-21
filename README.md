@@ -22,6 +22,13 @@
   - [Advance configuration](#advance-configuration)
 - [References](#references)
 
+# About this Fork
+
+This fork updates this docker image for arm64 using openjdk:8-jre and making updates needed to get it working
+
+- Removed Python test stuff - didn't bother to get this working, won't be using it
+- Updated URL for archived versions of ActiveMQ
+- Updated to run startup script with Python 3
 # Introduction
 
 Dockerfile to build a ActiveMQ container image.

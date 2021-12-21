@@ -1,25 +1,23 @@
-FROM webcenter/openjdk-jre:8
-MAINTAINER Sebastien LANGOUREAUX <linuxworkgroup@hotmail.com>
+FROM openjdk:8-jre
 
 ENV ACTIVEMQ_CONFIG_DIR /opt/activemq/conf.tmp
 ENV ACTIVEMQ_DATA_DIR /data/activemq
 
 # Update distro and install some packages
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y python-testtools python-nose python-pip vim curl supervisor logrotate locales  && \
+    apt-get install --no-install-recommends -y vim curl supervisor logrotate locales  && \
     update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales && \
     rm -rf /var/lib/apt/lists/*
 
 # Install stompy
-RUN pip install stomp.py
+# RUN pip install stomp.py
 
 # Lauch app install
 COPY assets/setup/ /app/setup/
 RUN chmod +x /app/setup/install
 RUN /app/setup/install
-
 
 # Copy the app setting
 COPY assets/entrypoint /app/
